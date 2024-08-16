@@ -23,6 +23,10 @@ public class Venta {
     private Double total;
     private Double igv;
 
+    @ManyToOne
+    @JoinColumn(name = "idestadoventa")
+    private EstadoVenta estadoVenta;
+
 
     //relacion entre venta y VentaDetalles
     @OneToMany(mappedBy = "venta",

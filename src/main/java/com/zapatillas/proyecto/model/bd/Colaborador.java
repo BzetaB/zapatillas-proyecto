@@ -28,7 +28,6 @@ public class Colaborador {
     private Boolean activo;
 
 
-
     @ManyToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
