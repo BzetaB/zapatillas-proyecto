@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MetodoDePagoRepository extends JpaRepository<MetodoDePago, Integer> {
+    MetodoDePago findByMetodopago(String metodopago);
 }

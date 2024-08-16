@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EstadoVentaRepository extends JpaRepository<EstadoVenta,Integer> {
+    EstadoVenta findByEstado(String estado);
 }
