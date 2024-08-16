@@ -7,10 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "tipodocumentocolaborador")
-public class TipoDocumentoColaborador {
+@Table(name = "estadoventa")
+public class EstadoVenta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer iddocumento;
-    private String nombredocumento;
+    private Integer idestadoventa;
+    private String estado;
 }
