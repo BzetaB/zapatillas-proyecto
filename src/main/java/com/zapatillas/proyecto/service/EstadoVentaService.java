@@ -33,6 +33,10 @@ public class EstadoVentaService implements IEstadoVentaService{
 
     @Override
     public void actualizarEstado(EstadoVenta estadoVenta) {
+        estadoVentaRepository.actualizarEstadoVenta(
+                estadoVenta.getEstado(),
+                estadoVenta.getIdestadoventa()
+        );
 
     }
 }

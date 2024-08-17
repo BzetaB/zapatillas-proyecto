@@ -28,6 +28,9 @@ public class VentaService implements IVentaService{
 
     @Override
     public void actualizarVenta(Venta venta) {
-
+        ventaRepository.actualizarVenta(
+                venta.getEstadoVenta().getIdestadoventa(),
+                venta.getIdventa()
+        );
     }
 }

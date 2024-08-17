@@ -33,6 +33,9 @@ public class TipoDocumentoColaboradorService implements iTipoDocumentoColaborado
 
     @Override
     public void actualizarTipoDocumentoCola(TipoDocumentoColaborador tipoDocumentoColaborador) {
-
+        tipoDocumentoColaboradorRepository.actualizarTipoDocumentoColaborador(
+                tipoDocumentoColaborador.getNombredocumento(),
+                tipoDocumentoColaborador.getIddocumento()
+        );
     }
 }

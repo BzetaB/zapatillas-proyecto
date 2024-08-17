@@ -33,6 +33,10 @@ public class MetodoDePagoService implements IMetodoDePagoService{
 
     @Override
     public void actualizarMetodoPago(MetodoDePago metodoDePago) {
+        metodoDePagoRepository.actualizarMetodoPago(
+                metodoDePago.getMetodopago(),
+                metodoDePago.getIdmetododepago()
+        );
 
     }
 }

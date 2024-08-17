@@ -1,5 +1,6 @@
 package com.zapatillas.proyecto.model.bd;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -23,15 +24,15 @@ public class Venta {
     private Double total;
     private Double igv;
 
-    @ManyToOne
-    @JoinColumn(name = "idestadoventa")
-    private EstadoVenta estadoVenta;
-
 
     //relacion entre venta y VentaDetalles
     @OneToMany(mappedBy = "venta",
             cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<VentaDetalles> productos = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "idestadoventa")
+    private EstadoVenta estadoVenta;
 
 }

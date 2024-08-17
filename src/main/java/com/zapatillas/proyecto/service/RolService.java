@@ -33,6 +33,9 @@ public class RolService implements IRolService{
 
     @Override
     public void actualizarRol(Rol rol) {
-
+        rolRepository.actualizarRoles(
+                rol.getNombrerol(),
+                rol.getIdrol()
+        );
     }
 }
