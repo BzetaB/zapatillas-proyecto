@@ -1,17 +1,13 @@
 package com.zapatillas.proyecto.service;
 
 import com.zapatillas.proyecto.model.bd.Colaborador;
-import com.zapatillas.proyecto.model.bd.Rol;
 import com.zapatillas.proyecto.model.bd.TipoDocumentoColaborador;
 import com.zapatillas.proyecto.model.dto.ColaboradorDto;
 import com.zapatillas.proyecto.repository.ColaboradorRepository;
-import com.zapatillas.proyecto.repository.RolRepository;
+import com.zapatillas.proyecto.repository.TipoDocumentoColaboradorRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 
@@ -19,33 +15,39 @@ import java.util.List;
 @Service
 public class ColaboradorService implements IColaboradorService {
     private ColaboradorRepository colaboradorRepository;
-    private RolRepository rolRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private TipoDocumentoColaboradorRepository tipoDocumentoColaboradorRepository;
     @Override
     public Colaborador obtenerColaboradorPorUsername(String username) {
         return colaboradorRepository.findByUsername(username);
     }
 
     @Override
-    public Colaborador guardarColaborador(ColaboradorDto colaboradorDto) {
-        Colaborador colaborador = new Colaborador();
-        colaborador.setUsername(colaboradorDto.getUsername());
-        colaborador.setPassword(bCryptPasswordEncoder.encode(colaboradorDto.getPassword()));
-        colaborador.setNombres(colaboradorDto.getNombres());
-        colaborador.setApellidos(colaboradorDto.getApellidos());
-        colaborador.setFechaingreso(colaboradorDto.getFechaingreso());
-        colaborador.setActivo(colaboradorDto.getActivo());
+    public void guardarColaborador(ColaboradorDto colaboradorDto) {
+        if (colaboradorDto.getIdcolaborador() != null && colaboradorDto.getIdcolaborador() > 0) {
+            // Actualiza el colaborador existente
+            colaboradorRepository.actualizarColaborador(
+                    colaboradorDto.getNombres(),
+                    colaboradorDto.getApellidos(),
+                    colaboradorDto.getActivo(),
+                    colaboradorDto.getIdcolaborador()
+            );
+        } else {
+            Colaborador nuevoColaborador = new Colaborador();
+            nuevoColaborador.setUsername(colaboradorDto.getUsername());
+            nuevoColaborador.setPassword(colaboradorDto.getPassword());
+            nuevoColaborador.setNombres(colaboradorDto.getNombres());
+            nuevoColaborador.setApellidos(colaboradorDto.getApellidos());
+            nuevoColaborador.setCorreo(colaboradorDto.getCorreo());
+            nuevoColaborador.setFechaingreso(colaboradorDto.getFechaingreso());
+            nuevoColaborador.setActivo(colaboradorDto.getActivo());
 
-        Rol roles = rolRepository.findByNombrerol("USER");
-        TipoDocumentoColaborador tipoDocumentoColaborador = new TipoDocumentoColaborador();
-        colaborador.setRoles(new HashSet<>(Arrays.asList(roles)));
-        tipoDocumentoColaborador.setIddocumento(colaboradorDto.getIddocumento());
-        tipoDocumentoColaborador.setNombredocumento(colaboradorDto.getNombredocumento());
-        colaborador.setTipoDocumentoColaborador(tipoDocumentoColaborador);
+            TipoDocumentoColaborador tipoDocumentoColaborador = new TipoDocumentoColaborador();
+            tipoDocumentoColaborador.setIddocumento(colaboradorDto.getIddocumento());
+            nuevoColaborador.setTipoDocumentoColaborador(tipoDocumentoColaborador);
 
-        return colaboradorRepository.save(colaborador);
+            colaboradorRepository.save(nuevoColaborador);
+        }
     }
-
 
     @Override
     public List<Colaborador> listarColaboradores() {

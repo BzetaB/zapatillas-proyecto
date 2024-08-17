@@ -21,4 +21,5 @@ public interface ColaboradorRepository extends JpaRepository<Colaborador,Integer
                                @Param("apellidos") String apellidos,
                                @Param("activo") boolean activo,
                                @Param("idcolaborador") Integer idcolaborador);
+
 }
