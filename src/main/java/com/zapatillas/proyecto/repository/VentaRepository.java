@@ -11,10 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VentaRepository extends JpaRepository<Venta,Integer> {
 
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE venta SET idestadoventa =:idestadoventa where "+
-            "idventa =:idventa",nativeQuery = true)
-    void actualizarVenta(@Param("idestadoventa") Integer idestadoventa,
-                         @Param("idventa") Integer idventa);
 }

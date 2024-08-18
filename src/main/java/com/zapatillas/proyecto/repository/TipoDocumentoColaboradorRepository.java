@@ -13,9 +13,4 @@ public interface TipoDocumentoColaboradorRepository
         extends JpaRepository<TipoDocumentoColaborador,Integer> {
     TipoDocumentoColaborador findByNombredocumento(String nombredocumento);
 
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE tipodocumentocolaborador SET nombredocumento =:nombredocumento where iddocumento =:iddocumento",nativeQuery = true)
-    void actualizarTipoDocumentoColaborador(@Param("nombredocumento")String nombredocumento,
-                         @Param("iddocumento")Integer iddocumento);
 }
