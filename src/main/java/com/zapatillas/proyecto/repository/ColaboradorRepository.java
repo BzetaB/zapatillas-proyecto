@@ -11,15 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ColaboradorRepository extends JpaRepository<Colaborador,Integer> {
     Colaborador findByUsername(String username);
-
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE colaborador SET nombres =:nombres,"+
-            "apellidos =:apellidos, activo =:activo where "+
-            "idcolaborador =:idcolaborador",nativeQuery = true)
-    void actualizarColaborador(@Param("nombres") String nombres,
-                               @Param("apellidos") String apellidos,
-                               @Param("activo") boolean activo,
-                               @Param("idcolaborador") Integer idcolaborador);
-
 }

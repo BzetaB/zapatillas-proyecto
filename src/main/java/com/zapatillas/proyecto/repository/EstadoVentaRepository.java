@@ -11,11 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EstadoVentaRepository extends JpaRepository<EstadoVenta,Integer> {
     EstadoVenta findByEstado(String estado);
-
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE estadoventa SET estado =:estado where "+
-            "idestadoventa =:idestadoventa",nativeQuery = true)
-    void actualizarEstadoVenta(@Param("estado") String estado,
-                               @Param("idestadoventa") Integer idestadoventa);
 }

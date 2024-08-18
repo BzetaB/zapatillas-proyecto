@@ -27,16 +27,19 @@ public class EstadoVentaService implements IEstadoVentaService{
     }
 
     @Override
-    public EstadoVenta guardarEstado(EstadoVenta estadoVenta) {
-        return estadoVentaRepository.save(estadoVenta);
+    public void guardarEstado(EstadoVenta estadoVenta) {
+        estadoVentaRepository.save(estadoVenta);
     }
 
     @Override
     public void actualizarEstado(EstadoVenta estadoVenta) {
-        estadoVentaRepository.actualizarEstadoVenta(
-                estadoVenta.getEstado(),
-                estadoVenta.getIdestadoventa()
-        );
+       EstadoVenta updateEstado = this.obtenerEstadoPorId(estadoVenta.getIdestadoventa());
+       updateEstado.setEstado(estadoVenta.getEstado());
+       estadoVentaRepository.save(updateEstado);
+    }
 
+    @Override
+    public void eliminarEstado(Integer id) {
+        estadoVentaRepository.deleteById(id);
     }
 }

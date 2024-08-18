@@ -55,9 +55,7 @@ public class ColaboradorController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Colaborador obtenerColaborador(
-            @PathVariable("id") int id
-    ){
+    public Colaborador obtenerColaborador(@PathVariable("id") int id){
         return iColaboradorService.obtenerColaboradorPorId(id);
     }
 
