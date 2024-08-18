@@ -14,7 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/estadoventa")
 public class EstadoVentaController {
-    IEstadoVentaService iEstadoVentaService;
+    private IEstadoVentaService iEstadoVentaService;
 
     @GetMapping("/registro")
     public String frmEstadoventa(Model model){

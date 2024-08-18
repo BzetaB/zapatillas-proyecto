@@ -12,10 +12,4 @@ import org.springframework.stereotype.Repository;
 public interface MetodoDePagoRepository extends JpaRepository<MetodoDePago, Integer> {
     MetodoDePago findByMetodopago(String metodopago);
 
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE metododepago SET metodopago =:metodopago where "+
-            "idmetododepago =:idmetododepago",nativeQuery = true)
-    void actualizarMetodoPago(@Param("metodopago") String metodopago,
-                               @Param("idmetododepago") Integer idmetododepago);
 }

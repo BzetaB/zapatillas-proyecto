@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface IMetodoDePagoService {
     MetodoDePago obtenerMetodoPorNombre (String metodo);
-    MetodoDePago guardarMetodo(MetodoDePago metodoDePago);
+    void guardarMetodo(MetodoDePago metodoDePago);
     List<MetodoDePago> listarMetodosPago();
     MetodoDePago obtenerMetodoPorId(Integer id);
     void actualizarMetodoPago(MetodoDePago metodoDePago);
+    void eliminarMetodoPago(Integer id);
 }
