@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("/colaborador")
 public class ColaboradorController {
     private IColaboradorService iColaboradorService;
+
     @GetMapping("/registro")
     public String frmColaborador(Model model){
         model.addAttribute("listacolaborador",
@@ -26,7 +27,7 @@ public class ColaboradorController {
     @PostMapping("/registrar")
     @ResponseBody
     public RespuestaGeneral guardarCategoria(@RequestBody ColaboradorDto colaboradorDto){
-        String mensaje="Categoria registrada correctamente";
+        String mensaje="Colaborador registrado correctamente";
         boolean resultado= true;
         try {
             iColaboradorService.guardarColaborador(colaboradorDto);
@@ -35,6 +36,21 @@ public class ColaboradorController {
             resultado= false;
         }
         return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    }
+
+    @PostMapping("/actualizar")
+    @ResponseBody
+    public RespuestaGeneral actualizar(@RequestBody ColaboradorDto colaboradorDto) {
+        String mensaje="Colaborador actualizado correctamente";
+        boolean resultado= true;
+        try {
+            iColaboradorService.actualizarColab(colaboradorDto);
+        }catch (Exception ex){
+            mensaje="Error: Ocurrio un error al conectarse a la BD";
+            resultado= false;
+        }
+        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+
     }
 
     @GetMapping("/{id}")
@@ -49,6 +65,21 @@ public class ColaboradorController {
     @ResponseBody
     public List<Colaborador> colaboradorList(){
         return iColaboradorService.listarColaboradores();
+    }
+
+    @GetMapping("/delete/{id}")
+    @ResponseBody
+    public RespuestaGeneral eliminar(@PathVariable("id") int id) {
+        String mensaje="Colaborador actualizado correctamente";
+        boolean resultado= true;
+        try {
+            iColaboradorService.eliminarColaboradorPorId(id);
+        }catch (Exception ex){
+            mensaje="Error: Ocurrio un error al conectarse a la BD";
+            resultado= false;
+        }
+        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+
     }
 
 

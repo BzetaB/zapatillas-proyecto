@@ -16,6 +16,7 @@ import java.util.List;
 public class ColaboradorService implements IColaboradorService {
     private ColaboradorRepository colaboradorRepository;
     private TipoDocumentoColaboradorRepository tipoDocumentoColaboradorRepository;
+
     @Override
     public Colaborador obtenerColaboradorPorUsername(String username) {
         return colaboradorRepository.findByUsername(username);
@@ -23,15 +24,7 @@ public class ColaboradorService implements IColaboradorService {
 
     @Override
     public void guardarColaborador(ColaboradorDto colaboradorDto) {
-        if (colaboradorDto.getIdcolaborador() != null && colaboradorDto.getIdcolaborador() > 0) {
-            // Actualiza el colaborador existente
-            colaboradorRepository.actualizarColaborador(
-                    colaboradorDto.getNombres(),
-                    colaboradorDto.getApellidos(),
-                    colaboradorDto.getActivo(),
-                    colaboradorDto.getIdcolaborador()
-            );
-        } else {
+
             Colaborador nuevoColaborador = new Colaborador();
             nuevoColaborador.setUsername(colaboradorDto.getUsername());
             nuevoColaborador.setPassword(colaboradorDto.getPassword());
@@ -46,7 +39,36 @@ public class ColaboradorService implements IColaboradorService {
             nuevoColaborador.setTipoDocumentoColaborador(tipoDocumentoColaborador);
 
             colaboradorRepository.save(nuevoColaborador);
-        }
+    }
+
+    @Override
+    public void actualizarColab(ColaboradorDto colaboradorDto) {
+
+        Colaborador updateColaborador = colaboradorRepository.findById(
+                colaboradorDto.getIdcolaborador()).orElse(null);
+            updateColaborador.setUsername(colaboradorDto.getUsername());
+            updateColaborador.setPassword(colaboradorDto.getPassword());
+            updateColaborador.setNombres(colaboradorDto.getNombres());
+            updateColaborador.setApellidos(colaboradorDto.getApellidos());
+            updateColaborador.setFechaingreso(colaboradorDto.getFechaingreso());
+            updateColaborador.setActivo(colaboradorDto.getActivo());
+
+            if (colaboradorDto.getIddocumento() != null) {
+                // Cargar el TipoDocumentoColaborador existente desde la base de datos
+                TipoDocumentoColaborador tipoDocumentoColaborador = tipoDocumentoColaboradorRepository.findById(colaboradorDto.getIddocumento()).orElse(null);
+
+                updateColaborador.setTipoDocumentoColaborador(tipoDocumentoColaborador);
+            } else {
+                // Manejar el caso en que iddocumento no se proporciona
+                updateColaborador.setTipoDocumentoColaborador(null);
+            }
+
+            colaboradorRepository.save(updateColaborador);
+    }
+
+    @Override
+    public void eliminarColaboradorPorId(Integer id) {
+        colaboradorRepository.deleteById(id);
     }
 
     @Override
@@ -59,14 +81,4 @@ public class ColaboradorService implements IColaboradorService {
         return colaboradorRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public void actualizarColaborador(Colaborador colaborador) {
-        colaboradorRepository.actualizarColaborador(
-                colaborador.getNombres(),
-                colaborador.getApellidos(),
-                colaborador.getActivo(),
-                colaborador.getIdcolaborador()
-        );
-
-    }
 }
