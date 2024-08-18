@@ -17,8 +17,8 @@ public class RolService implements IRolService{
     }
 
     @Override
-    public Rol guardarRol(Rol rol) {
-        return rolRepository.save(rol);
+    public void guardarRol(Rol rol) {
+        rolRepository.save(rol);
     }
 
     @Override
@@ -33,9 +33,13 @@ public class RolService implements IRolService{
 
     @Override
     public void actualizarRol(Rol rol) {
-        rolRepository.actualizarRoles(
-                rol.getNombrerol(),
-                rol.getIdrol()
-        );
+        Rol updateRol = this.obtenerRolPorId(rol.getIdrol());
+        updateRol.setNombrerol(rol.getNombrerol());
+        rolRepository.save(updateRol);
+    }
+
+    @Override
+    public void eliminarRol(Integer id) {
+        rolRepository.deleteById(id);
     }
 }

@@ -11,10 +11,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RolRepository extends JpaRepository<Rol,Integer> {
     Rol findByNombrerol(String nombrerol);
-
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE rol SET nombrerol =:nombrerol where idrol =:idrol",nativeQuery = true)
-    void actualizarRoles(@Param("nombrerol")String nombrerol,
-                         @Param("idrol")Integer idrol);
 }
