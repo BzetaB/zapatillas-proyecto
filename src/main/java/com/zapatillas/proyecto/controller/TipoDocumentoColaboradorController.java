@@ -26,17 +26,9 @@ public class TipoDocumentoColaboradorController {
     //create
     @PostMapping("/create")
     @ResponseBody
-    public RespuestaGeneral createTipoDocumentoColaborador
+    public TipoDocumentoColaborador createTipoDocumentoColaborador
     (@RequestBody TipoDocumentoColaborador tipoDocumentoColaborador){
-        String mensaje = "Tipo de Documento de Colaborador creado exitosamente";
-        boolean resultado = true;
-        try {
-            iTipoDocumentoColaboradorService.guardarDocumentoColaborador(tipoDocumentoColaborador);
-        }catch (Exception ex){
-            mensaje = "Error al conectar con la BD";
-            resultado = false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+        return iTipoDocumentoColaboradorService.guardarDocumentoColaborador(tipoDocumentoColaborador);
     }
 
 
@@ -48,18 +40,11 @@ public class TipoDocumentoColaboradorController {
     }
 
     //update
-    @PostMapping("/update")
+    @PutMapping("/{id}")
     @ResponseBody
-    public RespuestaGeneral updateDocumentoColaborador(@RequestBody TipoDocumentoColaborador tipoDocumentoColaborador){
-        String mensaje = "Tipo de Documento de Colaborador actualizado exitosamente";
-        boolean resultado = true;
-        try {
-            iTipoDocumentoColaboradorService.actualizarTipoDocumentoCola(tipoDocumentoColaborador);
-        }catch (Exception ex){
-            mensaje = "Error al conectar con la BD";
-            resultado = false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    public TipoDocumentoColaborador updateDocumentoColaborador(@PathVariable("id") int id,
+                                                               @RequestBody TipoDocumentoColaborador tipoDocumentoColaborador){
+        return iTipoDocumentoColaboradorService.actualizarTipoDocumentoCola(tipoDocumentoColaborador);
     }
 
     //delete
@@ -75,6 +60,12 @@ public class TipoDocumentoColaboradorController {
             resultado = false;
         }
         return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public TipoDocumentoColaborador obtenerTipoDocColab(@PathVariable("id") Integer id){
+        return iTipoDocumentoColaboradorService.obtenerTipoDocColabPorId(id);
     }
 
 

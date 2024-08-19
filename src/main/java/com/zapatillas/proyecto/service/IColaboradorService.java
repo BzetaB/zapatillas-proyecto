@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface IColaboradorService {
     Colaborador obtenerColaboradorPorUsername(String username);
-    void guardarColaborador(ColaboradorDto colaboradorDto);
-    void actualizarColab(ColaboradorDto colaboradorDto);
+    Colaborador guardarColaborador(ColaboradorDto colaboradorDto);
+    Colaborador actualizarColab(ColaboradorDto colaboradorDto);
     void eliminarColaboradorPorId(Integer id);
     List<Colaborador> listarColaboradores();
     Colaborador obtenerColaboradorPorId(Integer id);

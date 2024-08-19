@@ -26,16 +26,8 @@ public class VentaController {
     //create
     @PostMapping("/create")
     @ResponseBody
-    public RespuestaGeneral createVenta(@RequestBody VentaDto ventaDto){
-        String mensaje = "Venta creada correctamente";
-        boolean resultado = true;
-        try {
-            iVentaService.guardarVenta(ventaDto);
-        }catch (Exception ex){
-            mensaje = "Error al conectar la BD";
-            resultado = false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    public Venta createVenta(@RequestBody VentaDto ventaDto){
+        return iVentaService.guardarVenta(ventaDto);
     }
 
     //Read
@@ -46,18 +38,11 @@ public class VentaController {
     }
 
     //actualizar
-    @PostMapping("/update")
+    @PutMapping("/{id}")
     @ResponseBody
-    public RespuestaGeneral updateVenta(@RequestBody VentaDto ventaDto){
-        String mensaje = "Venta actualizada correctamente";
-        boolean resultado = true;
-        try {
-            iVentaService.actualizarVenta(ventaDto);
-        }catch (Exception ex){
-            mensaje = "Error al conectar la BD";
-            resultado = false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    public Venta updateVenta(@PathVariable("id") int id,
+                             @RequestBody VentaDto ventaDto){
+        return iVentaService.actualizarVenta(ventaDto);
     }
 
     //delete
@@ -73,6 +58,12 @@ public class VentaController {
             resultado = false;
         }
         return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Venta obtenerVenta(@PathVariable("id")Integer id){
+        return iVentaService.obtenerVentaPorId(id);
     }
 
 }

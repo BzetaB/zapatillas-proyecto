@@ -24,16 +24,8 @@ public class RolController {
     //create
     @PostMapping("/create")
     @ResponseBody
-    public RespuestaGeneral createRol(@RequestBody Rol rol){
-        String mensaje = "Rol creado correctamente";
-        boolean resultado = true;
-        try {
-            iRolService.guardarRol(rol);
-        }catch (Exception ex){
-            mensaje = "Error al conectarse a la BD";
-            resultado = false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    public Rol createRol(@RequestBody Rol rol){
+        return iRolService.guardarRol(rol);
     }
 
     //read
@@ -44,18 +36,11 @@ public class RolController {
     }
 
     //update
-    @PostMapping("/update")
+    @PutMapping("/{id}")
     @ResponseBody
-    public RespuestaGeneral updateRol(@RequestBody Rol rol){
-        String mensaje = "Rol actualizado correctamente";
-        boolean resultado = true;
-        try {
-            iRolService.actualizarRol(rol);
-        }catch (Exception ex){
-            mensaje = "Error al conectarse a la BD";
-            resultado = false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    public Rol updateRol(@PathVariable("id") int id,
+                         @RequestBody Rol rol){
+        return iRolService.actualizarRol(rol);
     }
 
     //DELETE
@@ -71,6 +56,12 @@ public class RolController {
             resultado = false;
         }
         return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Rol obtenerRol(@PathVariable("id") Integer id){
+        return iRolService.obtenerRolPorId(id);
     }
 
 }

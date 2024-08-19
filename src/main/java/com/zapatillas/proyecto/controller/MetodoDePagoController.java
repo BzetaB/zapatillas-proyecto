@@ -26,16 +26,8 @@ public class MetodoDePagoController {
     //create
     @PostMapping("/create")
     @ResponseBody
-    public RespuestaGeneral createMetodoPago(@RequestBody MetodoDePago metodoDePago){
-        String mensaje = "Metodo de Pago creado con exito.";
-        boolean resultado = true;
-        try {
-            iMetodoDePagoService.guardarMetodo(metodoDePago);
-        }catch (Exception ex){
-            mensaje= "Error: Ocurrio un error al conectarse a la BD";
-            resultado = false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    public MetodoDePago createMetodoPago(@RequestBody MetodoDePago metodoDePago){
+        return iMetodoDePagoService.guardarMetodo(metodoDePago);
     }
 
     //read
@@ -47,18 +39,11 @@ public class MetodoDePagoController {
 
 
     //update
-    @PostMapping("/update")
+    @PutMapping("/{id}")
     @ResponseBody
-    public RespuestaGeneral updateMetodo(@RequestBody MetodoDePago metodoDePago){
-        String mensaje = "Metodo de Pago actualizado con exito.";
-        boolean resultado = true;
-        try {
-            iMetodoDePagoService.actualizarMetodoPago(metodoDePago);
-        }catch (Exception ex){
-            mensaje= "Error: Ocurrio un error al conectarse a la BD";
-            resultado = false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    public MetodoDePago updateMetodo(@PathVariable("id") int id,
+                                     @RequestBody MetodoDePago metodoDePago){
+        return iMetodoDePagoService.actualizarMetodoPago(metodoDePago);
     }
 
     //delete
@@ -74,6 +59,13 @@ public class MetodoDePagoController {
             resultado = false;
         }
         return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    }
+
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public MetodoDePago obtenerMetododePago(@PathVariable("id") Integer id){
+        return iMetodoDePagoService.obtenerMetodoPorId(id);
     }
 
 }

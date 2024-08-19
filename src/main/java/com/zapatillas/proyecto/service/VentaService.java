@@ -22,12 +22,12 @@ public class VentaService implements IVentaService{
     }
 
     @Override
-    public void guardarVenta(VentaDto ventaDto) {
+    public Venta guardarVenta(VentaDto ventaDto) {
         Venta nuevaVenta = new Venta();
         EstadoVenta estadoVenta = new EstadoVenta();
         estadoVenta.setIdestadoventa(ventaDto.getIdestadoventa());
         nuevaVenta.setEstadoVenta(estadoVenta);
-        ventaRepository.save(nuevaVenta);
+        return ventaRepository.save(nuevaVenta);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class VentaService implements IVentaService{
     }
 
     @Override
-    public void actualizarVenta(VentaDto ventaDto) {
+    public Venta actualizarVenta(VentaDto ventaDto) {
 
            Venta updateVenta = this.obtenerVentaPorId(ventaDto.getIdventa());
 
@@ -48,7 +48,7 @@ public class VentaService implements IVentaService{
            }else {
                updateVenta.setEstadoVenta(null);
            }
-           ventaRepository.save(updateVenta);
+           return ventaRepository.save(updateVenta);
     }
 
     @Override

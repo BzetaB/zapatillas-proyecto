@@ -23,7 +23,7 @@ public class ColaboradorService implements IColaboradorService {
     }
 
     @Override
-    public void guardarColaborador(ColaboradorDto colaboradorDto) {
+    public Colaborador guardarColaborador(ColaboradorDto colaboradorDto) {
 
             Colaborador nuevoColaborador = new Colaborador();
             nuevoColaborador.setUsername(colaboradorDto.getUsername());
@@ -38,11 +38,11 @@ public class ColaboradorService implements IColaboradorService {
             tipoDocumentoColaborador.setIddocumento(colaboradorDto.getIddocumento());
             nuevoColaborador.setTipoDocumentoColaborador(tipoDocumentoColaborador);
 
-            colaboradorRepository.save(nuevoColaborador);
+            return colaboradorRepository.save(nuevoColaborador);
     }
 
     @Override
-    public void actualizarColab(ColaboradorDto colaboradorDto) {
+    public Colaborador actualizarColab(ColaboradorDto colaboradorDto) {
 
         Colaborador updateColaborador = colaboradorRepository.findById(
                 colaboradorDto.getIdcolaborador()).orElse(null);
@@ -63,7 +63,7 @@ public class ColaboradorService implements IColaboradorService {
                 updateColaborador.setTipoDocumentoColaborador(null);
             }
 
-            colaboradorRepository.save(updateColaborador);
+            return colaboradorRepository.save(updateColaborador);
     }
 
     @Override

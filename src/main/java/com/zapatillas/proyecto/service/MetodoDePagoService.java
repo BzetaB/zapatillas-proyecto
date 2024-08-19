@@ -17,8 +17,8 @@ public class MetodoDePagoService implements IMetodoDePagoService{
     }
 
     @Override
-    public void guardarMetodo(MetodoDePago metodoDePago) {
-         metodoDePagoRepository.save(metodoDePago);
+    public MetodoDePago guardarMetodo(MetodoDePago metodoDePago) {
+         return metodoDePagoRepository.save(metodoDePago);
     }
 
     @Override
@@ -32,10 +32,10 @@ public class MetodoDePagoService implements IMetodoDePagoService{
     }
 
     @Override
-    public void actualizarMetodoPago(MetodoDePago metodoDePago) {
+    public MetodoDePago actualizarMetodoPago(MetodoDePago metodoDePago) {
         MetodoDePago updateMetodo = this.obtenerMetodoPorId(metodoDePago.getIdmetododepago());
         updateMetodo.setMetodopago(metodoDePago.getMetodopago());
-        metodoDePagoRepository.save(updateMetodo);
+        return metodoDePagoRepository.save(updateMetodo);
     }
 
     @Override

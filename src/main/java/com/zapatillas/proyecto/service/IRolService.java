@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IRolService {
     Rol obtenerRolPorMombrerol(String nombrerol);
-    void guardarRol(Rol rol);
+    Rol guardarRol(Rol rol);
     List<Rol> listarRol();
     Rol obtenerRolPorId(Integer idrol);
-    void actualizarRol(Rol rol);
+    Rol actualizarRol(Rol rol);
     void eliminarRol(Integer id);
 }

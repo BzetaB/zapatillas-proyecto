@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface IVentaService {
     Venta obtenerVentaPorId(Integer id);
-    void guardarVenta(VentaDto ventaDto);
+    Venta guardarVenta(VentaDto ventaDto);
     List<Venta> listarVenta();
-    void actualizarVenta(VentaDto ventaDto);
+    Venta actualizarVenta(VentaDto ventaDto);
     void eliminarVenta(Integer id);
 }

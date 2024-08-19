@@ -27,15 +27,15 @@ public class EstadoVentaService implements IEstadoVentaService{
     }
 
     @Override
-    public void guardarEstado(EstadoVenta estadoVenta) {
-        estadoVentaRepository.save(estadoVenta);
+    public EstadoVenta guardarEstado(EstadoVenta estadoVenta) {
+        return estadoVentaRepository.save(estadoVenta);
     }
 
     @Override
-    public void actualizarEstado(EstadoVenta estadoVenta) {
+    public EstadoVenta actualizarEstado(EstadoVenta estadoVenta) {
        EstadoVenta updateEstado = this.obtenerEstadoPorId(estadoVenta.getIdestadoventa());
        updateEstado.setEstado(estadoVenta.getEstado());
-       estadoVentaRepository.save(updateEstado);
+       return estadoVentaRepository.save(updateEstado);
     }
 
     @Override

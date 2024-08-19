@@ -24,47 +24,30 @@ public class ColaboradorController {
         return "colaborador/frmcolaborador";
     }
 
+    //create
     @PostMapping("/registrar")
     @ResponseBody
-    public RespuestaGeneral guardarCategoria(@RequestBody ColaboradorDto colaboradorDto){
-        String mensaje="Colaborador registrado correctamente";
-        boolean resultado= true;
-        try {
-            iColaboradorService.guardarColaborador(colaboradorDto);
-        }catch (Exception ex){
-            mensaje="Error: Ocurrio un error al conectarse a la BD";
-            resultado= false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    public Colaborador guardarCategoria(@RequestBody ColaboradorDto colaboradorDto){
+        return iColaboradorService.guardarColaborador(colaboradorDto);
     }
 
-    @PostMapping("/actualizar")
-    @ResponseBody
-    public RespuestaGeneral actualizar(@RequestBody ColaboradorDto colaboradorDto) {
-        String mensaje="Colaborador actualizado correctamente";
-        boolean resultado= true;
-        try {
-            iColaboradorService.actualizarColab(colaboradorDto);
-        }catch (Exception ex){
-            mensaje="Error: Ocurrio un error al conectarse a la BD";
-            resultado= false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
 
-    }
-
-    @GetMapping("/{id}")
-    @ResponseBody
-    public Colaborador obtenerColaborador(@PathVariable("id") int id){
-        return iColaboradorService.obtenerColaboradorPorId(id);
-    }
-
+    //read
     @GetMapping("/listar")
     @ResponseBody
     public List<Colaborador> colaboradorList(){
         return iColaboradorService.listarColaboradores();
     }
 
+    //update
+    @PutMapping("/{id}")
+    @ResponseBody
+    public Colaborador actualizar(@PathVariable("id") Integer id,
+                                  @RequestBody ColaboradorDto colaboradorDto) {
+            return iColaboradorService.actualizarColab(colaboradorDto);
+    }
+
+    //delete
     @GetMapping("/delete/{id}")
     @ResponseBody
     public RespuestaGeneral eliminar(@PathVariable("id") int id) {
@@ -79,6 +62,13 @@ public class ColaboradorController {
         return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
 
     }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Colaborador obtenerColaborador(@PathVariable("id") Integer id){
+        return iColaboradorService.obtenerColaboradorPorId(id);
+    }
+
 
 
 }

@@ -17,8 +17,8 @@ public class TipoDocumentoColaboradorService implements iTipoDocumentoColaborado
     }
 
     @Override
-    public void guardarDocumentoColaborador(TipoDocumentoColaborador tipoDocumentoColaborador) {
-        tipoDocumentoColaboradorRepository.save(tipoDocumentoColaborador);
+    public TipoDocumentoColaborador guardarDocumentoColaborador(TipoDocumentoColaborador tipoDocumentoColaborador) {
+        return tipoDocumentoColaboradorRepository.save(tipoDocumentoColaborador);
     }
 
     @Override
@@ -32,11 +32,11 @@ public class TipoDocumentoColaboradorService implements iTipoDocumentoColaborado
     }
 
     @Override
-    public void actualizarTipoDocumentoCola(TipoDocumentoColaborador tipoDocumentoColaborador) {
+    public TipoDocumentoColaborador actualizarTipoDocumentoCola(TipoDocumentoColaborador tipoDocumentoColaborador) {
         TipoDocumentoColaborador updateTipoDocColab = this.obtenerTipoDocColabPorId(
                 tipoDocumentoColaborador.getIddocumento());
         updateTipoDocColab.setNombredocumento(tipoDocumentoColaborador.getNombredocumento());
-        tipoDocumentoColaboradorRepository.save(updateTipoDocColab);
+        return tipoDocumentoColaboradorRepository.save(updateTipoDocColab);
     }
 
     @Override

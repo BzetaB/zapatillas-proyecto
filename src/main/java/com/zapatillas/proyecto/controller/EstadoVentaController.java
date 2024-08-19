@@ -26,16 +26,8 @@ public class EstadoVentaController {
     //create
     @PostMapping("/create")
     @ResponseBody
-    public RespuestaGeneral createEstado(@RequestBody EstadoVenta estadoVenta){
-        String mensaje = "Estado de Venta creado";
-        boolean resultado = true;
-        try {
-            iEstadoVentaService.guardarEstado(estadoVenta);
-        }catch (Exception ex){
-            mensaje="Error: Ocurrio un error al guardar el estado";
-            resultado= false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    public EstadoVenta createEstado(@RequestBody EstadoVenta estadoVenta){
+        return iEstadoVentaService.guardarEstado(estadoVenta);
     }
 
     //read
@@ -46,18 +38,11 @@ public class EstadoVentaController {
     }
 
     //update
-    @PostMapping("/update")
+    @PutMapping("/{id}")
     @ResponseBody
-    public RespuestaGeneral updateEstado(@RequestBody EstadoVenta estadoVenta){
-        String mensaje = "Estado de Venta Actualizado";
-        boolean resultado = true;
-        try {
-            iEstadoVentaService.actualizarEstado(estadoVenta);
-        }catch (Exception ex){
-            mensaje="Error: Ocurrio un error al actualizar";
-            resultado= false;
-        }
-        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
+    public EstadoVenta updateEstado(@PathVariable("id") int id,
+                                    @RequestBody EstadoVenta estadoVenta){
+        return iEstadoVentaService.actualizarEstado(estadoVenta);
     }
 
     //delate
@@ -74,4 +59,13 @@ public class EstadoVentaController {
         }
         return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
     }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public EstadoVenta obtenerEstadoVenta(@PathVariable("id") Integer id){
+        return iEstadoVentaService.obtenerEstadoPorId(id);
+    }
+
+
+
 }

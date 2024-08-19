@@ -8,7 +8,7 @@ public interface IEstadoVentaService {
     EstadoVenta obtenerEstadoPorId(Integer id);
     EstadoVenta obtenerEstadoPorNombre(String estado);
     List<EstadoVenta> listarEstadosVenta();
-    void guardarEstado(EstadoVenta estadoVenta);
-    void actualizarEstado(EstadoVenta estadoVenta);
+    EstadoVenta guardarEstado(EstadoVenta estadoVenta);
+    EstadoVenta actualizarEstado(EstadoVenta estadoVenta);
     void eliminarEstado(Integer id);
 }
