@@ -10,3 +10,4 @@ public interface IProvedorService {
     Provedor buscarProvedorPorId(Integer id);
     void eliminarProvedor(Integer id);
 }
+

@@ -9,7 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class ProvedorService implements  IProvedorService{
+public class ProvedorService implements IProvedorService {
     private final ProvedorRepository provedorRepository;
 
     @Override
@@ -36,3 +36,4 @@ public class ProvedorService implements  IProvedorService{
         }
     }
 }
+
