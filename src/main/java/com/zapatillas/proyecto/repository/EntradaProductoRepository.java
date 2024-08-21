@@ -9,3 +9,4 @@ public interface EntradaProductoRepository extends JpaRepository<EntradaProducto
 }
 
 
+
