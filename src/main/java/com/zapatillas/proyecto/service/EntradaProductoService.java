@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class EntradaProductoService implements IEntradaProductoService {
 
-    private EntradaProductoRepository entradaProductoRepository;
+    private final EntradaProductoRepository entradaProductoRepository;
 
     @Override
     public List<EntradaProducto> listarEntradaProductos() {
@@ -37,5 +37,6 @@ public class EntradaProductoService implements IEntradaProductoService {
         }
     }
 }
+
 
 
