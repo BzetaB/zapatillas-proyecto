@@ -19,4 +19,7 @@ public class TipoDocumentoCliente {
 
     @OneToMany(mappedBy = "tipodocumentocliente")
     private Set<Cliente> cliente;
+
+
+
 }

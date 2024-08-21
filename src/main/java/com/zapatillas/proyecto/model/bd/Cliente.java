@@ -25,6 +25,7 @@ public class Cliente {
 
     private Boolean sexo;
 
+
     private Date fechanacimiento;
 
     private String emailcliente;

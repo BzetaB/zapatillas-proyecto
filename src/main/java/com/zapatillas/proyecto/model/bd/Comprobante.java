@@ -10,10 +10,13 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "comprobante")
+
 public class Comprobante {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idcomprobante;
+
     @Temporal(TemporalType.DATE)
     private Date fechacomprobante;
 
