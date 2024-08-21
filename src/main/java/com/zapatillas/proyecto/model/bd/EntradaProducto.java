@@ -19,6 +19,10 @@ public class EntradaProducto {
     private Integer etdprostock;
 
     @ManyToOne
+    @JoinColumn(name = "idproducto")
+    private Producto producto;
+
+    @ManyToOne
     @JoinColumn(name = "idprovedor")
     private Provedor proveedor;
 }
