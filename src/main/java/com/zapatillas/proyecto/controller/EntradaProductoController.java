@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/entrada-productos")
 public class EntradaProductoController {
 
-    private final IEntradaProductoService entradaProductoService;
+    private IEntradaProductoService entradaProductoService;
 
     @GetMapping("/list")
     public String listarEntradaProductos(Model model) {
@@ -42,5 +42,6 @@ public class EntradaProductoController {
         return "redirect:/entrada-productos/list";
     }
 }
+
 
 

@@ -14,20 +14,20 @@ import java.util.List;
 @RequestMapping("/provedores")
 public class ProvedorController {
 
-    private final IProvedorService provedorService;
+    private IProvedorService provedorService;
 
     @GetMapping("/list")
     public String listarProvedores(Model model) {
         List<Provedor> lista = provedorService.listarProvedores();
         model.addAttribute("provedores", lista);
-        return "provedor/list";
+        return "provedor/list"; // La vista a la que se redirige
     }
 
     @GetMapping("/form")
     public String mostrarFormulario(@RequestParam(required = false) Integer id, Model model) {
         Provedor provedor = id != null ? provedorService.buscarProvedorPorId(id) : new Provedor();
         model.addAttribute("provedor", provedor);
-        return "provedor/form";
+        return "provedor/form"; // La vista a la que se redirige
     }
 
     @PostMapping("/save")
@@ -42,4 +42,6 @@ public class ProvedorController {
         return "redirect:/provedores/list";
     }
 }
+
+
 

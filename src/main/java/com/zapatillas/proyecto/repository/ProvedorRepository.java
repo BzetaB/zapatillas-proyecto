@@ -8,3 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface ProvedorRepository extends JpaRepository<Provedor, Integer> {
 }
 
+

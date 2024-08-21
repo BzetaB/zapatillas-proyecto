@@ -11,3 +11,4 @@ public interface IEntradaProductoService {
     void eliminarEntradaProducto(Integer id);
 }
 
+
