@@ -13,6 +13,6 @@ public class Marca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idmarca;
 
-    private String nombre;
-    private String descripcion;
+    private String marcaname;
+    private String marcadesc;
 }

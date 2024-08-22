@@ -1,6 +1,7 @@
 package com.zapatillas.proyecto.controller;
 
 import com.zapatillas.proyecto.model.bd.Marca;
+import com.zapatillas.proyecto.model.dto.RespuestaGeneral;
 import com.zapatillas.proyecto.service.IMarcaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,30 +17,44 @@ public class MarcaController {
 
     private IMarcaService marcaService;
 
+    private IMarcaService iMarcaService;
+    @GetMapping("/register")
+    public String frmRol(Model model){
+        model.addAttribute("listaMarca",iMarcaService.listarMarcas());
+        return "marca/frmrol";
+    }
+
+    @PostMapping("/create")
+    @ResponseBody
+    public Marca createMarca(@RequestBody Marca marca ){
+        return iMarcaService.guardarMarca(marca);
+    }
+
     @GetMapping("/list")
-    public String listarMarcas(Model model) {
-        List<Marca> lista = marcaService.listarMarcas();
-        model.addAttribute("marcas", lista);
-        return "marca/list";
+    @ResponseBody
+    public List<Marca> rolList(){
+        return iMarcaService.listarMarcas();
     }
 
-    @GetMapping("/form")
-    public String mostrarFormulario(@RequestParam(required = false) Integer id, Model model) {
-        Marca marca = id != null ? marcaService.buscarMarcaPorId(id) : new Marca();
-        model.addAttribute("marca", marca);
-        return "marca/form";
-    }
-
-    @PostMapping("/save")
-    public String guardarMarca(@ModelAttribute Marca marca) {
-        marcaService.guardarMarca(marca);
-        return "redirect:/marcas/list";
+    @PutMapping("/{id}")
+    @ResponseBody
+    public Marca updateMarca(@PathVariable("id") int id,
+                             @RequestBody Marca marca){
+        return iMarcaService.actualizarMarca(marca);
     }
 
     @GetMapping("/delete/{id}")
-    public String eliminarMarca(@PathVariable Integer id) {
-        marcaService.eliminarMarca(id);
-        return "redirect:/marcas/list";
+    @ResponseBody
+    public RespuestaGeneral updateMarca(@PathVariable("id") int id){
+        String mensaje = "Marca eliminada correctamente";
+        boolean resultado = true;
+        try {
+            iMarcaService.eliminarMarca(id);
+        }catch (Exception ex){
+            mensaje = "Error al conectarse a la BD";
+            resultado = false;
+        }
+        return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
     }
 }
 
