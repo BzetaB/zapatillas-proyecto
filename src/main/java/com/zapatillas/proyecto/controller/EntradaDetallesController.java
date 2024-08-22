@@ -12,33 +12,33 @@ import java.util.List;
 @AllArgsConstructor
 @Controller
 @RequestMapping("/entrada-detalles")
-public class EntradaDetalleController {
+public class EntradaDetallesController {
 
-    private IEntradaDetallesService entradaDetalleService;
+    private IEntradaDetallesService entradaDetallesService;
 
     @GetMapping("/list")
     public String listarEntradaDetalles(Model model) {
-        List<EntradaDetalles> lista = entradaDetalleService.listarEntradaDetalles();
+        List<EntradaDetalles> lista = entradaDetallesService.listarEntradaDetalles();
         model.addAttribute("entradaDetalles", lista);
         return "entrada-detalle/list";
     }
 
     @GetMapping("/form")
     public String mostrarFormulario(@RequestParam(required = false) Integer id, Model model) {
-        EntradaDetalles entradaDetalle = id != null ? entradaDetalleService.buscarEntradaDetallePorId(id) : new EntradaDetalles();
+        EntradaDetalles entradaDetalle = id != null ? entradaDetallesService.buscarEntradaDetallePorId(id) : new EntradaDetalles();
         model.addAttribute("entradaDetalle", entradaDetalle);
         return "entrada-detalle/form";
     }
 
     @PostMapping("/save")
     public String guardarEntradaDetalle(@ModelAttribute EntradaDetalles entradaDetalle) {
-        entradaDetalleService.guardarEntradaDetalle(entradaDetalle);
+        entradaDetallesService.guardarEntradaDetalle(entradaDetalle);
         return "redirect:/entrada-detalles/list";
     }
 
     @GetMapping("/delete/{id}")
     public String eliminarEntradaDetalle(@PathVariable Integer id) {
-        entradaDetalleService.eliminarEntradaDetalle(id);
+        entradaDetallesService.eliminarEntradaDetalle(id);
         return "redirect:/entrada-detalles/list";
     }
 }
