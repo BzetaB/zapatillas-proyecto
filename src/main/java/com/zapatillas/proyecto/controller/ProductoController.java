@@ -1,6 +1,8 @@
 package com.zapatillas.proyecto.controller;
 
+import com.zapatillas.proyecto.model.bd.Colaborador;
 import com.zapatillas.proyecto.model.bd.Producto;
+import com.zapatillas.proyecto.model.dto.ProductoDto;
 import com.zapatillas.proyecto.service.IProductoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,29 +18,28 @@ public class ProductoController {
 
     private IProductoService productoService;
 
-    @GetMapping("/list")
-    public String listarProductos(Model model) {
-        List<Producto> lista = productoService.listarProductos();
-        model.addAttribute("productos", lista);
-        return "producto/list";
+    @GetMapping("/listar")
+    @ResponseBody
+    public List<Producto> listarProductos(){
+        return productoService.listarProductos();
     }
 
-    @GetMapping("/form")
-    public String mostrarFormulario(@RequestParam(required = false) Integer id, Model model) {
-        Producto producto = id != null ? productoService.buscarProductoPorId(id) : new Producto();
-        model.addAttribute("producto", producto);
-        return "producto/form";
+    @PostMapping("/registrar")
+    @ResponseBody
+    public Producto guardarProducto(@RequestBody ProductoDto productoDto) {
+        return productoService.guardarProducto(productoDto);
     }
 
-    @PostMapping("/save")
-    public String guardarProducto(@ModelAttribute Producto producto) {
-        productoService.guardarProducto(producto);
-        return "redirect:/productos/list";
+    @PutMapping("/{id}")
+    @ResponseBody
+    public Producto actualizar(@PathVariable("id") Integer id,
+                                  @RequestBody ProductoDto productoDto) {
+            return productoService.actualizarProducto(productoDto);
     }
 
-    @GetMapping("/delete/{id}")
-    public String eliminarProducto(@PathVariable Integer id) {
-        productoService.eliminarProducto(id);
-        return "redirect:/productos/list";
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Producto obtenerProducto(@PathVariable("id") Integer id){
+        return productoService.buscarProductoPorId(id);
     }
 }
