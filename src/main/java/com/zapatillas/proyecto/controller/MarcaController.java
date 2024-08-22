@@ -56,5 +56,11 @@ public class MarcaController {
         }
         return RespuestaGeneral.builder().mensaje(mensaje).resultado(resultado).build();
     }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public Marca obtenerMarca(@PathVariable("id") Integer id){
+        return iMarcaService.obtenerMarcaPorId(id);
+    }
 }
 

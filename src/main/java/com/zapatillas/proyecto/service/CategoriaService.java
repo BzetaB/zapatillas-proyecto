@@ -14,18 +14,34 @@ public class CategoriaService implements ICategoriaService {
     private CategoriaRepository categoriaRepository;
 
     @Override
+    public Categoria obtenerCategoriaPorCatename(String catename) {
+
+        return categoriaRepository.findByCatename(catename);
+    }
+
+    @Override
     public List<Categoria> listarCategorias() {
+
         return categoriaRepository.findAll();
     }
 
     @Override
     public Categoria guardarCategoria(Categoria categoria) {
+
         return categoriaRepository.save(categoria);
     }
 
     @Override
-    public Categoria buscarCategoriaPorId(Integer id) {
+    public Categoria obtenerCategoriaPorId(Integer id) {
+
         return categoriaRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Categoria actualizarCategoria(Categoria categoria){
+        Categoria updateCategoria = this.obtenerCategoriaPorId(categoria.getIdcategoria());
+        updateCategoria.setCatename(categoria.getCatename());
+        return categoriaRepository.save(updateCategoria);
     }
 
     @Override

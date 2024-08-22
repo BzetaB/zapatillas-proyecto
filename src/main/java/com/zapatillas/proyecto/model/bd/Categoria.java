@@ -13,6 +13,6 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idcategoria;
 
-    private String nombre;
+    private String catename;
 }
 

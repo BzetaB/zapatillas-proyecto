@@ -1,7 +1,6 @@
 package com.zapatillas.proyecto.service;
 
 import com.zapatillas.proyecto.model.bd.Marca;
-import com.zapatillas.proyecto.model.bd.Rol;
 
 import java.util.List;
 

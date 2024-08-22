@@ -5,9 +5,11 @@ import com.zapatillas.proyecto.model.bd.Categoria;
 import java.util.List;
 
 public interface ICategoriaService {
+    Categoria obtenerCategoriaPorCatename(String catename);
     List<Categoria> listarCategorias();
     Categoria guardarCategoria(Categoria categoria);
-    Categoria buscarCategoriaPorId(Integer id);
+    Categoria obtenerCategoriaPorId(Integer idcategoria);
+    Categoria actualizarCategoria(Categoria categoria);
     void eliminarCategoria(Integer id);
 }
 

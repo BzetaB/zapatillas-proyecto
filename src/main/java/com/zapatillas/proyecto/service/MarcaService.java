@@ -1,7 +1,6 @@
 package com.zapatillas.proyecto.service;
 
 import com.zapatillas.proyecto.model.bd.Marca;
-import com.zapatillas.proyecto.model.bd.Rol;
 import com.zapatillas.proyecto.repository.MarcaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +15,7 @@ public class MarcaService implements IMarcaService {
 
     @Override
     public Marca obtenerMarcaPorMarcaname(String marcaname) {
+
         return marcaRepository.findByMarcaname(marcaname);
     }
 
