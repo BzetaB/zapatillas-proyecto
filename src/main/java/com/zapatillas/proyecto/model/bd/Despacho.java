@@ -27,4 +27,6 @@ public class Despacho {
     @ManyToOne
     @JoinColumn(name = "iddirecciondespacho")
     private DireccionDespacho direccionDespacho;
+
+
 }

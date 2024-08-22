@@ -25,6 +25,7 @@ public class Cliente {
 
     private Boolean sexo;
 
+
     private Date fechanacimiento;
 
     private String emailcliente;
@@ -48,5 +49,7 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente")
     private Set<Comprobante> comprobante;
+
+
 
 }

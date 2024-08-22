@@ -24,4 +24,5 @@ public class DireccionDespacho {
     // Relación bidireccional con Despacho
     @OneToMany(mappedBy = "direccionDespacho")
     private Set<Despacho> despachos;
+
 }

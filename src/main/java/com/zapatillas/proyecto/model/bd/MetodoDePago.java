@@ -13,4 +13,5 @@ public class MetodoDePago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idmetododepago;
     private String metodopago;
+
 }
