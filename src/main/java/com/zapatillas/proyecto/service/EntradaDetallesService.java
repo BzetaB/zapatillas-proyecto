@@ -11,30 +11,31 @@ import java.util.List;
 @Service
 public class EntradaDetallesService implements IEntradaDetallesService {
 
-    private final EntradaDetallesRepository entradaDetalleRepository;
+    private EntradaDetallesRepository entradaDetallesRepository;
 
     @Override
     public List<EntradaDetalles> listarEntradaDetalles() {
-        return entradaDetalleRepository.findAll();
+        return entradaDetallesRepository.findAll();
     }
 
     @Override
     public EntradaDetalles guardarEntradaDetalle(EntradaDetalles entradaDetalle) {
-        return entradaDetalleRepository.save(entradaDetalle);
+        return entradaDetallesRepository.save(entradaDetalle);
     }
 
     @Override
     public EntradaDetalles buscarEntradaDetallePorId(Integer id) {
-        return entradaDetalleRepository.findById(id).orElse(null);
+        return entradaDetallesRepository.findById(id).orElse(null);
     }
 
     @Override
     public void eliminarEntradaDetalle(Integer id) {
-        if (entradaDetalleRepository.existsById(id)) {
-            entradaDetalleRepository.deleteById(id);
+        if (entradaDetallesRepository.existsById(id)) {
+            entradaDetallesRepository.deleteById(id);
         } else {
             throw new RuntimeException("EntradaDetalle con ID " + id + " no encontrado");
         }
     }
 }
+
 

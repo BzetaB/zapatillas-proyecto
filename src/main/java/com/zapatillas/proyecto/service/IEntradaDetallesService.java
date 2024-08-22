@@ -11,3 +11,4 @@ public interface IEntradaDetallesService {
     void eliminarEntradaDetalle(Integer id);
 }
 
+
