@@ -16,19 +16,23 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idproducto;
+    private String pname;
+    private String pdesc;
+    private Double pprecio;
+    private Integer pstock;
+    private Integer ptalla;
 
+    @ManyToOne
+    @JoinColumn(name = "idcategoria")
+    private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "idmarca")
+    private Marca marca;
 
-
-
-
-
-
-
-
-    //relacion entre producto y VentaDetalles
     @OneToMany(mappedBy = "producto",
             cascade = CascadeType.ALL, orphanRemoval = true)
+
     @JsonManagedReference
     private Set<VentaDetalles> ventas = new HashSet<>();
 }
