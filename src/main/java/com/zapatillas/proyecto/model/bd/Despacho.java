@@ -28,4 +28,5 @@ public class Despacho {
     @JoinColumn(name = "iddirecciondespacho")
     private DireccionDespacho direccionDespacho;
 
+
 }
